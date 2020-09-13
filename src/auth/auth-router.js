@@ -2,6 +2,7 @@ const express = require('express');
 const AuthService = require('./auth-service');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { JWT_SECRET } = require('../config');
 
 const authRouter = express.Router();
 
@@ -31,7 +32,7 @@ authRouter
             if (!passwordMatch)
               return res.status(400).json({ error: 'Incorrect Username or Password' });
 
-            const token = jwt.sign({ user_id: user.id }, process.env.JWT_SECRET, { subject: user.username });
+            const token = jwt.sign({ user_id: user.id }, JWT_SECRET, { subject: user.username });
 
             return res.json({
               authToken: token,

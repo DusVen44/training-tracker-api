@@ -16,6 +16,7 @@ const HistoryService = {
     },
     deleteRoutine(knex, user_id, id) {
         return knex
+            .from('history')
             .where({
                 user_id: user_id,
                 id: id

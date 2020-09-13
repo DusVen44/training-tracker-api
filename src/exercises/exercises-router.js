@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const xss = require('xss');
 const ExercisesService = require('./exercises-service');
+const e = require('cors');
 
 const exercisesRouter = express.Router();
 const jsonParser = express.json();
@@ -9,9 +10,6 @@ const jsonParser = express.json();
 const serializeExercise = exercise => ({
     id: exercise.id,
     exercise_name: xss(exercise.exercise_name),
-    exercise_type: xss(exercise.exercise_type),
-    set_count: xss(exercise.set_count),
-    lbs: xss(exercise.lbs),
 });
 
 exercisesRouter
@@ -25,8 +23,11 @@ exercisesRouter
             .catch(next)
     })
     .post(jsonParser, (req, res, next) => {
-        const { exercise_name, exercise_type } = req.body;
-        const newExercise = { exercise_name, exercise_type, set_count, lbs };
+        let { exercise_name } = req.body;
+
+        const newExercise = {
+            exercise_name
+        }
 
         for (const[key, value] of Object.entries(newExercise))
             if (value == null)

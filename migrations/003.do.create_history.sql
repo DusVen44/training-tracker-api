@@ -4,5 +4,6 @@ CREATE TABLE history (
     date_created TIMESTAMPTZ NOT NULL DEFAULT now(),
     routine_date TIMESTAMPTZ NOT NULL,
     routine_title TEXT NOT NULL,
-    routine_content TEXT NOT NULL
+    routine_exercises TEXT NOT NULL,
+    routine_input TEXT NOT NULL
 );
