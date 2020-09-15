@@ -67,7 +67,7 @@ historyRouter
         const { user_id, id } = req.body;
 
         HistoryService.deleteRoutine(knexInstance, user_id, id)
-            .then(() => {
+            .then((routine) => {
                 res.status(204).end();
             })
             .catch(next);

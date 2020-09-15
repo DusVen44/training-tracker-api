@@ -14,12 +14,12 @@ const HistoryService = {
             .returning('*')
             .then(([newRoutine]) => newRoutine)
     },
-    deleteRoutine(knex, user_id, id) {
+    deleteRoutine(knex, user_id, routine_id) {
         return knex
             .from('history')
             .where({
                 user_id: user_id,
-                id: id
+                id: routine_id
             })
             .delete();
     }
