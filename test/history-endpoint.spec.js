@@ -9,7 +9,6 @@ describe('History Endpoint Test', () => {
 
     const { testUsers, testHistory } = Helpers.makeFixtures();
     const testUser = testUsers[0];
-    console.log("TEST USER", testUsers[0])
     const testHistorySingle = testHistory[0];
 
     before('make knex instance', () => {
@@ -32,11 +31,11 @@ describe('History Endpoint Test', () => {
             const newRoutine = {
                 id: 20,
                 user_id: testUser.id,
-                date_created: '2020-04-27T00:00:00.000Z',
+                date_created: '2020-04-28T00:00:00.000Z',
                 routine_date: '2020-04-28T00:00:00.000Z',
                 routine_title: 'Routine Test Title',
-                routine_exercises: 'Barbell Bench Press',
-                routine_input: 'Test Routine Input'
+                routine_exercises: ['Barbell Bench Press'],
+                routine_input: ['Test Routine Input']
             };
 
             return supertest(app)
@@ -47,11 +46,11 @@ describe('History Endpoint Test', () => {
                 .expect ((res) => {
                     expect(res.body).to.have.property('id');
                     expect(res.body.user_id).to.eql(newRoutine.user_id);
-                    expect(res.body.date_created).to.eql(newRoutine.date_created);
+                    expect(res.body.date_created).to.be.a('string');
                     expect(res.body.routine_date).to.eql(newRoutine.routine_date);
                     expect(res.body.routine_title).to.eql(newRoutine.routine_title);
-                    expect(res.body.routine_exercises).to.eql(newRoutine.routine_exercises);
-                    expect(res.body.routine_input).to.eql(newRoutine.routine_input);
+                    expect(res.body.routine_exercises).to.be.a('string');
+                    expect(res.body.routine_input).to.be.a('string');
                 });
         });
     });

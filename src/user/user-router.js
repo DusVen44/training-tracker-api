@@ -27,7 +27,7 @@ userRouter
 
         let { username, email, password } = req.body;
 
-        username = username.toLowerCase();
+        username = username && username.toLowerCase();
 
         for (const field of ['username', 'email', 'password'])
             if(!req.body[field])

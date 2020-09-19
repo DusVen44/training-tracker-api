@@ -4,15 +4,15 @@ const jwt = require('jsonwebtoken');
 function createTestExercises() {
     return [
         {
-            id: 1,
+            id: 45,
             exercise_name: "Barbell Bench Press"
         },
         {
-            id: 2,
+            id: 57,
             exercise_name: "Goblet Squat"
         },
         {
-            id: 3,
+            id: 77,
             exercise_name: "Stationary Bike"
         }
     ];
@@ -79,8 +79,9 @@ function createTestHistory(users) {
 function makeFixtures() {
     const testUsers = createTestUsers();
     const testHistory = createTestHistory(testUsers);
+    const testExercises = createTestExercises();
 
-    return { testUsers, testHistory };
+    return { testUsers, testHistory, testExercises };
 }
 
 function clearTables(db) {
@@ -137,7 +138,7 @@ function seedOtherTables(db, history, users) {
 
 function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
     const token = jwt.sign({ user_id: user.id }, secret, {
-      subject: user.user_name,
+      subject: user.username,
       algorithm: 'HS256',
     })
     return `Bearer ${token}`
