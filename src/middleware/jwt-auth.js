@@ -8,7 +8,7 @@ function requireAuth(req, res, next) {
     return res.status(401).json({ error: 'Missing Bearer Token' });
   } else {
     bearerToken = authToken.slice(7, authToken.length);
-  }
+  };
 
   try {
     const payload = AuthService.verifyJwt(bearerToken);
@@ -17,7 +17,7 @@ function requireAuth(req, res, next) {
       .then((user) => {
         if (!user) {
           return res.status(401).json({ error: 'Unauthorized request' });
-        }
+        };
         req.user = user;
         next();
       })
@@ -26,9 +26,7 @@ function requireAuth(req, res, next) {
       });
   } catch (error) {
     res.status(401).json({ error: 'Unauthorized request' });
-  }
-}
-
-module.exports = {
-  requireAuth,
+  };
 };
+
+module.exports = requireAuth;

@@ -20,7 +20,7 @@ userRouter
             .then(users => {
                 res.json(users.map(serializeUser))
                 })
-        .catch(next)
+        .catch(next);
     })
     .post(jsonBodyParser, (req, res, next) => {
         const knexInstance = req.app.get('db');
@@ -33,25 +33,25 @@ userRouter
             if(!req.body[field])
                 return res.status(400).json({
                     error: `Missing '${field}' in request body`
-                })
+                });
         
         const passwordError = UserService.validatePassword(password);
         if (passwordError) {
             return res.status(400).json({
                 error: passwordError
             })
-        }
+        };
 
         UserService.emailTaken(knexInstance, email)
             .then((emailTaken) => {
                 if (emailTaken)
-                    return res.status(400).json({ error: 'This email address is already registered' })
+                    return res.status(400).json({ error: 'This email address is already registered' });
 
         UserService.usernameTaken(knexInstance, username)
             .then((usernameTaken) => {
                 if (usernameTaken)
                     return res.status(400).json({ error: 'Username taken'})
-            })
+            });
 
                 return UserService.hashPassword(password)
                     .then((hashedPassword) => {
@@ -69,6 +69,6 @@ userRouter
                     });
             })
         .catch(next);
-    })
+    });
 
 module.exports = userRouter;

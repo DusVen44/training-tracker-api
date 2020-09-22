@@ -15,37 +15,32 @@ const serializeExercise = exercise => ({
 exercisesRouter
     .route('/')
     .get((req, res, next) => {
-        const knexInstance = req.app.get('db')
+        const knexInstance = req.app.get('db');
         ExercisesService.getAllExercises(knexInstance)
             .then(exercises => {
                 res.json(exercises.map(serializeExercise))
             })
-            .catch(next)
+            .catch(next);
     })
     .post(jsonParser, (req, res, next) => {
         let { exercise_name } = req.body;
 
-        const newExercise = {
-            exercise_name
-        }
+        const newExercise = { exercise_name };
 
         for (const[key, value] of Object.entries(newExercise))
             if (value == null)
                 return res.status(400).json({
                     error: { message: `Missing '${key}' in request body`}
-                })
+                });
         
-        ExercisesService.addExercise(
-            req.app.get('db'),
-            newExercise
-        )
+        ExercisesService.addExercise(req.app.get('db'), newExercise)
             .then(exercise => {
                 res
                     .status(201)
                     .location(path.posix.join(req.originalUrl, `/${exercise.id}`))
                     .json(serializeExercise(exercise))
             })
-            .catch(next)
-    })
+            .catch(next);
+    });
 
 module.exports = exercisesRouter;

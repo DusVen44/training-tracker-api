@@ -9,7 +9,7 @@ const authRouter = express.Router();
 authRouter
   .route('/login')
   .post(express.json(), (req, res, next) => {
-    const knexInstance = req.app.get('db')
+    const knexInstance = req.app.get('db');
     const { username, password } = req.body;
     const loginUser = { username, password };
 

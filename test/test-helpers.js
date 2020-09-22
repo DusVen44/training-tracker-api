@@ -41,8 +41,8 @@ function createTestUsers() {
             password: 'password3',
             date_created: '2020-09-10T16:28:32.615Z'
         },
-    ]
-}
+    ];
+};
 
 function createTestHistory(users) {
     return [
@@ -82,13 +82,13 @@ function makeFixtures() {
     const testExercises = createTestExercises();
 
     return { testUsers, testHistory, testExercises };
-}
+};
 
 function clearTables(db) {
     return db.raw(
         `TRUNCATE history, users, exercises RESTART IDENTITY CASCADE`
     );
-}
+};
 
 function seedExercises(db, exercises) {
     return db
@@ -124,7 +124,7 @@ function seedHistory(db, history, users) {
             history[history.length - 1].id,
         ]);
     });
-}
+};
 
 function seedOtherTables(db, history, users) {
     return db.transaction(async (trx) => {
@@ -134,15 +134,15 @@ function seedOtherTables(db, history, users) {
             history[history.length - 1].id,
         ]);
     });
-}
+};
 
 function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
     const token = jwt.sign({ user_id: user.id }, secret, {
       subject: user.username,
       algorithm: 'HS256',
-    })
+    });
     return `Bearer ${token}`
-  }
+  };
 
 module.exports = {
     createTestExercises,
@@ -155,4 +155,4 @@ module.exports = {
     seedHistory,
     seedOtherTables,
     makeAuthHeader
-}
+};

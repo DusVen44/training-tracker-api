@@ -8,8 +8,6 @@ describe('Exercises Endpoint Test', () => {
     let db;
 
     const { testExercises, testUsers } = Helpers.makeFixtures();
-    const testUser = testUsers[0];
-    const singleExercise = testExercises[0];
 
     before('make knex instance', () => {
         db = knex({
@@ -41,10 +39,7 @@ describe('Exercises Endpoint Test', () => {
             .expect((res) => {
                 expect(res.body).to.have.property('id');
                 expect(res.body.exercise_name).to.eql(newExercise.exercise_name);
-            })
-        })
-    })
-
-
-    }
-)
+            });
+        });
+    });
+    });

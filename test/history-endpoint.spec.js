@@ -9,7 +9,6 @@ describe('History Endpoint Test', () => {
 
     const { testUsers, testHistory } = Helpers.makeFixtures();
     const testUser = testUsers[0];
-    const testHistorySingle = testHistory[0];
 
     before('make knex instance', () => {
         db = knex({
@@ -54,5 +53,4 @@ describe('History Endpoint Test', () => {
                 });
         });
     });
-
-})
+});

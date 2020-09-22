@@ -46,8 +46,8 @@ describe('Users Endpoint TEST', function () {
                         .expect(400, {
                             error: `Missing '${field}' in request body`
                         });
-                })
-            })
+                });
+            });
 
             it('Responds 400 \'Password must be longer than 8 characters\' when empty password', () => {
                 const userShortPassword = {

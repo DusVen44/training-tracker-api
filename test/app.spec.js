@@ -5,5 +5,5 @@ describe('App', () => {
     return supertest(app)
       .get('/')
       .expect(200, 'Welcome to Training Tracker!')
-  })
-})
+  });
+});
